@@ -15,11 +15,9 @@ import by.kovalski.customarray.service.impl.SortServiceImpl;
 public class Main {
 
   public static void main(String[] args) throws CustomException {
-    CustomArray a = new CustomArray("Fuck", new int[]{-123123213,435345435,1, 2, 3, 5,5,5,5,5,5,4,-1,-2,0,-7,-7,-8,-9,-6,-5});
+    CustomArray a = new CustomArray("New", new int[]{-123123213,435345435,1, 2, 3, 5,5,5,5,5,5,4,-1,-2,0,-7,-7,-8,-9,-6,-5});
     System.out.println(a);
     SortService service = SortServiceImpl.getInstance();
-    SortService service1 = SortServiceImpl.getInstance();
-    System.out.println(service+" "+service1);
     service.recursiveQuickSort(a,0,a.getArray().length-1);
     System.out.println(a);
   }
