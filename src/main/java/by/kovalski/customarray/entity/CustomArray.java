@@ -1,24 +1,22 @@
 package by.kovalski.customarray.entity;
 
 import by.kovalski.customarray.exception.CustomException;
+import by.kovalski.customarray.util.IDGenerator;
 
+import java.security.interfaces.EdECKey;
 import java.util.Arrays;
 
-public class CustomArray {
-  private String id;
+public class CustomArray implements Cloneable{
+  private int id;
   private int[] array;
 
-  public CustomArray(String id,int[]array)throws CustomException{
+  public CustomArray(int[]array)throws CustomException{
     setArray(array);
-    this.id = id;
+    this.id = IDGenerator.getID();
   }
 
-  public String getId() {
+  public int getId() {
     return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
   }
 
   public int[] getArray() {
@@ -38,6 +36,27 @@ public class CustomArray {
       copy[i] = array[i];
     }
     this.array = copy;
+  }
+
+@Override
+  public Object clone()
+  {
+    int[] copy = new int[array.length];
+    for(int i = 0;i<array.length;i++){
+      copy[i] = array[i];
+    }
+    Object result = null;
+    try {
+      result = super.clone();
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+    try {
+      ((CustomArray)result).setArray(copy);
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+    return result;
   }
 
   @Override

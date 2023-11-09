@@ -84,7 +84,6 @@ public class SortServiceImpl implements SortService {
   if (copy.length == 0) {
    throw new CustomException("Empty array");
   }
-
  }
 
  @Override
