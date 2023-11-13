@@ -29,4 +29,8 @@ public class Warehouse {
     return map.replace(key, value);
   }
 
+  public Map<Integer, ArrayStatistics> getMap(){
+    return new HashMap<>(map);
+  }
+
 }

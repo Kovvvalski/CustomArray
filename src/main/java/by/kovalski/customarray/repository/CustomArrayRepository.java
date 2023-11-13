@@ -18,7 +18,7 @@ public class CustomArrayRepository {
   private CustomArrayRepository(List<CustomArray> customArrays) {
     this.customArrays = new ArrayList<>();
     for (CustomArray array : customArrays) {
-      this.customArrays.add(array.clone());
+      this.customArrays.add(array);
     }
   }
 
@@ -33,12 +33,12 @@ public class CustomArrayRepository {
   }
 
   public CustomArray get(int index) {
-    return (CustomArray) customArrays.get(index).clone();
+    return (CustomArray) customArrays.get(index);
   }
 
   public boolean add(CustomArray array) {
     logger.info("Object with id " + array.getId() + " added to the repository");
-    return customArrays.add(array.clone());
+    return customArrays.add(array);
   }
 
   public CustomArray remove(int index) {
@@ -65,7 +65,9 @@ public class CustomArrayRepository {
   }
 
   public List<CustomArray> getCustomArrays() {
-    return this.customArrays;
+    List<CustomArray> copy = new ArrayList<>();
+    copy.addAll(customArrays);
+    return copy;
   }
 
   public void sort(Comparator<CustomArray> c) {

@@ -2,7 +2,7 @@ package by.kovalski.customarray.entity;
 
 import by.kovalski.customarray.exception.CustomException;
 import by.kovalski.customarray.observer.ArrayStatisticsObserver;
-import by.kovalski.customarray.observer.impl.ArrayStatisticsObserverImpl;
+import by.kovalski.customarray.service.CreateStatisticsService;
 import by.kovalski.customarray.util.IdGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +19,7 @@ public class CustomArray implements Cloneable {
   public CustomArray(int[] array) throws CustomException {
     setArray(array);
     this.id = IdGenerator.getID();
+    addObserver();
     notifyObserver();
   }
 
@@ -57,6 +58,14 @@ public class CustomArray implements Cloneable {
     }
   }
 
+  public void replaceByIndex(int index, int newElement) {
+    if (index >= 0 && index < array.length) {
+      array[index] = newElement;
+    } else {
+      logger.error("Cannot replace element with index " + index);
+    }
+  }
+
   public void add(int element) {
     int[] copy = new int[array.length + 1];
     for (int i = 0; i < array.length; i++)
@@ -71,7 +80,11 @@ public class CustomArray implements Cloneable {
   }
 
   public void addObserver() {
-    observer = new ArrayStatisticsObserverImpl();
+    observer = (o1) -> {
+      CreateStatisticsService service = CreateStatisticsService.getInstance();
+      ArrayStatistics statistics = service.countStatistics(o1);
+      Warehouse.getInstance().put(o1.getId(), statistics);
+    };
   }
 
 
