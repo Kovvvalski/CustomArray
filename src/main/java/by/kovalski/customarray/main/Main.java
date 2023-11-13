@@ -35,6 +35,13 @@ public class Main {
     for (CustomArray a : repository.getCustomArrays()) {
       System.out.println(m.get(a.getId()));
     }
+    repository.get(0).add(3);
+    System.out.println();
+    Map<Integer, ArrayStatistics> m1 = w.getMap();
+    for (CustomArray a : repository.getCustomArrays()) {
+      System.out.println(m1.get(a.getId()));
+    }
+
 
   }
 }
