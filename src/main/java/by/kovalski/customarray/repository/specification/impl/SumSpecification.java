@@ -7,7 +7,7 @@ import by.kovalski.customarray.service.CountService;
 import by.kovalski.customarray.service.impl.CountServiceImpl;
 
 public class SumSpecification implements Specification {
-  private int sum;
+  private final int sum;
   private static final CountService service = CountServiceImpl.getInstance();
 
   public SumSpecification(int sum) {

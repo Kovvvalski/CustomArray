@@ -1,21 +1,21 @@
 package by.kovalski.customarray.validator;
 
 public class CustomArrayValidator {
-  private static CustomArrayValidator INSTANCE;
   private static final String ELEMENT_REGEX = "-?\\d+";
+  private static CustomArrayValidator instance;
 
-  public boolean isValidElement(String element) {
-    return element.matches(ELEMENT_REGEX);
-  }
 
   private CustomArrayValidator() {
 
   }
 
   public static CustomArrayValidator getInstance() {
-    if (INSTANCE == null)
-      INSTANCE = new CustomArrayValidator();
-    return INSTANCE;
+    if (instance == null)
+      instance = new CustomArrayValidator();
+    return instance;
   }
 
+  public boolean isValidElement(String element) {
+    return element.matches(ELEMENT_REGEX);
+  }
 }

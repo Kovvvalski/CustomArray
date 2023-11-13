@@ -10,11 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomArrayCreator {
+  private static final Logger logger = LogManager.getLogger();
   private static final String SEPARATOR_REGEX = "[,\\s]+";
   private static final int DEFAULT_VALUE = 0;
-  private static CustomArrayCreator INSTANCE;
-  private static final Logger logger = LogManager.getLogger();
+  private static CustomArrayCreator instance;
 
+  private CustomArrayCreator() {
+
+  }
+
+  public static CustomArrayCreator getInstance() {
+    if (instance == null) {
+      instance = new CustomArrayCreator();
+    }
+    return instance;
+  }
 
   public List<CustomArray> createArraysFromListOfString(List<String> strings) {
     List<CustomArray> out = new ArrayList<>();
@@ -27,7 +37,7 @@ public class CustomArrayCreator {
         if (validator.isValidElement(elements[i])) {
           try {
             temp.add(Integer.parseInt(elements[i]));
-          } catch (RuntimeException e) {
+          } catch (NumberFormatException e) {
             logger.error(elements[i]+" is out of int range",e);
             temp.add(DEFAULT_VALUE);
           }
@@ -52,14 +62,7 @@ public class CustomArrayCreator {
     return out;
   }
 
-  private CustomArrayCreator() {
 
-  }
 
-  public static CustomArrayCreator getInstance() {
-    if (INSTANCE == null) {
-      INSTANCE = new CustomArrayCreator();
-    }
-    return INSTANCE;
-  }
+
 }

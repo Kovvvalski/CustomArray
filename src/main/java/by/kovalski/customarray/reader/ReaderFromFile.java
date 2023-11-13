@@ -11,9 +11,21 @@ import java.nio.file.*;
 import java.util.List;
 
 public class ReaderFromFile {
-  private static ReaderFromFile INSTANCE;
-  private static final Charset CHARSET = StandardCharsets.UTF_8;
   private static final Logger logger = LogManager.getLogger();
+  private static ReaderFromFile instance;
+  private static final Charset CHARSET = StandardCharsets.UTF_8;
+
+
+  private ReaderFromFile(){
+
+  }
+
+  public static ReaderFromFile getInstance(){
+    if(instance == null){
+      instance = new ReaderFromFile();
+    }
+    return instance;
+  }
 
   public List<String> readCustomArraysFromFile(String path) throws CustomException{
     if(path == null){
@@ -32,15 +44,6 @@ public class ReaderFromFile {
     return lines;
   }
 
-  private ReaderFromFile(){
 
-  }
-
-  public static ReaderFromFile getInstance(){
-    if(INSTANCE == null){
-      INSTANCE = new ReaderFromFile();
-    }
-    return INSTANCE;
-  }
 
 }

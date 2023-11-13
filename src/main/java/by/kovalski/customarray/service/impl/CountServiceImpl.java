@@ -7,6 +7,16 @@ import by.kovalski.customarray.service.CountService;
 public class CountServiceImpl implements CountService {
   private static CountServiceImpl INSTANCE;
 
+  private CountServiceImpl() {
+  }
+
+  public static CountServiceImpl getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new CountServiceImpl();
+    }
+    return INSTANCE;
+  }
+
   @Override
   public double countAverageValue(CustomArray array) throws CustomException {
     return (double) countSumOfElements(array) / array.getArray().length;
@@ -64,13 +74,5 @@ public class CountServiceImpl implements CountService {
     return sum;
   }
 
-  private CountServiceImpl() {
-  }
 
-  public static CountServiceImpl getInstance() {
-    if (INSTANCE == null) {
-      INSTANCE = new CountServiceImpl();
-    }
-    return INSTANCE;
-  }
 }
