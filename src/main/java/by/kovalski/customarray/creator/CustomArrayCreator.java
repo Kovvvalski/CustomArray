@@ -38,11 +38,11 @@ public class CustomArrayCreator {
           try {
             temp.add(Integer.parseInt(elements[i]));
           } catch (NumberFormatException e) {
-            logger.error(elements[i]+" is out of int range",e);
+            logger.error(elements[i] + " is out of int range", e);
             temp.add(DEFAULT_VALUE);
           }
         } else {
-          logger.error("Cannot parse int from "+elements[i]);
+          logger.error("Cannot parse int from " + elements[i]);
         }
       }
       if (!temp.isEmpty()) {
@@ -53,7 +53,7 @@ public class CustomArrayCreator {
         try {
           out.add(new CustomArray(array));
         } catch (CustomException e) {
-          logger.error("Error during creating custom array",e);
+          logger.error("Error during creating custom array", e);
         }
       }
       temp.clear();
@@ -61,8 +61,6 @@ public class CustomArrayCreator {
     logger.info("Successfully created list of custom arrays");
     return out;
   }
-
-
 
 
 }

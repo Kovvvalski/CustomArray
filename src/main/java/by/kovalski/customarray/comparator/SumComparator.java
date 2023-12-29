@@ -11,18 +11,18 @@ import java.util.Comparator;
 
 public class SumComparator implements Comparator<CustomArray> {
   private static final Logger logger = LogManager.getLogger();
+
   @Override
   public int compare(CustomArray o1, CustomArray o2) {
     CountService service = CountServiceImpl.getInstance();
     try {
       return service.countSumOfElements(o1) - service.countSumOfElements(o2);
-    }catch (CustomException e) {
-      logger.info("Cannot count sum of one of the arrays", e);
+    } catch (CustomException e) {
+      logger.error("Cannot count sum of one of the arrays", e);
     }
-    if(o1.getArray().length == o2.getArray().length)
+    if (o1.getArray().length == o2.getArray().length) {
       return 0;
-    if(o1.getArray().length == 0)
-      return -1;
-    return 1;
+    }
+    return o1.getArray().length == 0 ? -1 : 1;
   }
 }

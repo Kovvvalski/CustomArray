@@ -15,19 +15,17 @@ import java.util.function.IntPredicate;
 
 public class MaxComparator implements Comparator<CustomArray> {
   private final static Logger logger = LogManager.getLogger();
+
   @Override
-  public int compare(CustomArray o1,CustomArray o2){
+  public int compare(CustomArray o1, CustomArray o2) {
     FindService service = FindServiceImpl.getInstance();
     try {
       return o1.getArray()[service.findIndexOfMax(o1)] - o2.getArray()[service.findIndexOfMax(o2)];
     } catch (CustomException e) {
-      logger.info("Cannot find index of max element of one of arrays",e);
+      logger.error("Cannot find index of max element of one of arrays", e);
     }
-    if(o1.getArray().length == o2.getArray().length)
+    if (o1.getArray().length == o2.getArray().length)
       return 0;
-    if(o1.getArray().length == 0)
-      return -1;
-    return 1;
-
+    return o1.getArray().length == 0 ? -1 : 1;
   }
 }

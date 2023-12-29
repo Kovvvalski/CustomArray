@@ -32,9 +32,6 @@ public class CustomArrayRepository {
     return customArrays.size();
   }
 
-  public CustomArray get(int index) {
-    return (CustomArray) customArrays.get(index);
-  }
 
   public boolean add(CustomArray array) {
     logger.info("Object with id " + array.getId() + " added to the repository");
@@ -44,10 +41,6 @@ public class CustomArrayRepository {
   public CustomArray remove(int index) {
     logger.info("Trying to remove object from repository with index " + index);
     return customArrays.remove(index);
-  }
-
-  public int indexOf(CustomArray o) {
-    return customArrays.indexOf(o);
   }
 
   public List<CustomArray> query(Specification specification) {
@@ -62,16 +55,6 @@ public class CustomArrayRepository {
 
     }
     return out;
-  }
-
-  public List<CustomArray> getCustomArrays() {
-    List<CustomArray> copy = new ArrayList<>();
-    copy.addAll(customArrays);
-    return copy;
-  }
-
-  public void sort(Comparator<CustomArray> c) {
-    customArrays.sort(c);
   }
 
 }

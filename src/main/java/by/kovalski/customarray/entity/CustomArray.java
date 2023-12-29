@@ -124,7 +124,8 @@ public class CustomArray implements Cloneable {
   }
 
   private void notifyObserver() {
-    if (observer != null)
+    if (observer != null) {
       observer.changeArrayElement(this);
+    }
   }
 }

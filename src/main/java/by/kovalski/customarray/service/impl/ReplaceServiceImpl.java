@@ -7,6 +7,7 @@ import by.kovalski.customarray.service.ReplaceService;
 
 public class ReplaceServiceImpl implements ReplaceService {
   private static ReplaceServiceImpl INSTANCE;
+
   @Override
   public void ReplaceElementByCondition(CustomArray array, Condition condition, int ofNumber, int toNumber) throws CustomException {
     if (array == null) {
