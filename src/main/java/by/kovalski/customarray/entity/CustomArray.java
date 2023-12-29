@@ -56,6 +56,7 @@ public class CustomArray implements Cloneable {
     } else {
       logger.error("Cannot remove element with index +" + index);
     }
+    notifyObserver();
   }
 
   public void replaceByIndex(int index, int newElement) {
@@ -64,6 +65,7 @@ public class CustomArray implements Cloneable {
     } else {
       logger.error("Cannot replace element with index " + index);
     }
+    notifyObserver();
   }
 
   public void add(int element) {
@@ -80,10 +82,15 @@ public class CustomArray implements Cloneable {
   }
 
   public void addObserver() {
-    observer = (o1) -> {
+    observer = o1 -> {
       CreateStatisticsService service = CreateStatisticsService.getInstance();
-      ArrayStatistics statistics = service.countStatistics(o1);
-      Warehouse.getInstance().put(o1.getId(), statistics);
+      try {
+        ArrayStatistics statistics = service.countStatistics(o1);
+        Warehouse.getInstance().put(o1.getId(), statistics);
+      } catch (CustomException e) {
+        logger.error("Error during creating statistics", e);
+      }
+
     };
   }
 
@@ -106,12 +113,12 @@ public class CustomArray implements Cloneable {
     try {
       result = (CustomArray) super.clone();
     } catch (CloneNotSupportedException e) {
-      e.printStackTrace();
+      logger.error("Error during cloning", e);
     }
     try {
       result.setArray(copy);
     } catch (CustomException e) {
-      e.printStackTrace();
+      logger.error("Error during setting array", e);
     }
     return result;
   }

@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Comparator;
+import java.util.function.IntPredicate;
 
 public class MaxComparator implements Comparator<CustomArray> {
   private final static Logger logger = LogManager.getLogger();
@@ -27,5 +28,6 @@ public class MaxComparator implements Comparator<CustomArray> {
     if(o1.getArray().length == 0)
       return -1;
     return 1;
+
   }
 }
